@@ -1,4 +1,6 @@
 image-stream
 ============
 
-Stream images to a browser from a DataSift push stream
+Quick and dirty - stream instagram photos from a DataSift push delivery to a browser via Socket.io.
+
+
