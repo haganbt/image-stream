@@ -6,48 +6,44 @@ var express = require("express"),
     url  = 'http://localhost:' + port + '/',
     socket;
 
-
-app.use(express.bodyParser());
-
-
+//app.use(express.bodyParser());
 server.listen(port);
 console.log("Express server listening on port " + port);
 console.log(url);
-
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
 app.post('/data', function (req, res) {
-  
+	
+	console.log('DEBUG: Processing POST request.')
+
+
   try {
+
   	
-  	var data = req.body;
+  		var body = req.body.toString().split("\n");
   	
+  		for(i in body) {
+	    	console.log(body[i]);
+	
+	
+	
+	
+		}
+
+  //	var data = req.body;
   	
-	for(var opengraphIndx in data.links.meta.opengraph){ 
-		
-		//console.log(opengraphIndx + ' : ' + data.links.meta.opengraph[opengraphIndx].image);
-		
-		 socket.emit('ping', { msg: '<p><img src="' + data.links.meta.opengraph[opengraphIndx].image + '" /></p>' });
-	}	 	
-  	
-  	
-  	
+	//for(var opengraphIndx in data.links.meta.opengraph){ 	
+	//	 socket.emit('ping', { msg: '<p><img src="' + data.links.meta.opengraph[opengraphIndx].image + '" /></p>' });
+	//}	 	
+
   } catch (e){
   	console.log('DEBUG: ' + e)
   }
-  
-  
-  
   res.send({"success":true});
 });
-
-
-
-
-
 
 
 
