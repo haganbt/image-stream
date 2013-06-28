@@ -1,43 +1,37 @@
 var express = require("express"),
 	app = express(),
     server = require('http').createServer(app),
-    io = require('socket.io').listen(server),
+    io = require('socket.io').listen(server, { log: false }),
     port = 8080,
     url  = 'http://localhost:' + port + '/',
     socket;
 
-//app.use(express.bodyParser());
+
 server.listen(port);
 console.log("Express server listening on port " + port);
 console.log(url);
+
+app.use(express.bodyParser());
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
+
 app.post('/data', function (req, res) {
 	
 	console.log('DEBUG: Processing POST request.')
 
-
   try {
 
-  	
-  		var body = req.body.toString().split("\n");
-  	
-  		for(i in body) {
-	    	console.log(body[i]);
-	
-	
-	
-	
-		}
+  		//var body = req.body.toString().split("\n");
+  		var body = req.body;
 
-  //	var data = req.body;
-  	
-	//for(var opengraphIndx in data.links.meta.opengraph){ 	
-	//	 socket.emit('ping', { msg: '<p><img src="' + data.links.meta.opengraph[opengraphIndx].image + '" /></p>' });
-	//}	 	
+  		for(i in body) {
+			for(var opengraphIndx in body[i].links.meta.opengraph){ 	
+		 		socket.emit('ping', { msg: '<p><img src="' + body[i].links.meta.opengraph[opengraphIndx].image + '" /></p>' });
+			}	
+		}
 
   } catch (e){
   	console.log('DEBUG: ' + e)
