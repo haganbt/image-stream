@@ -29,6 +29,12 @@ app.post('/data', function (req, res) {
 
  	// Each interaction
   	for(i in body) {
+
+      // Ignore retweets
+      if(body[i].twitter !== undefined && body[i].twitter.retweet !== undefined && body[i].twitter.retweet.text !== undefined){
+        continue;
+       } 
+
 	  for(var opengraphIndx in body[i].links.meta.opengraph){ 	
 	    socket.emit('ping', { msg: '<p><img src="' + body[i].links.meta.opengraph[opengraphIndx].image + '" /><br /><br />' + body[i].interaction.content  + '</p><br /><br />' });
 	  }
