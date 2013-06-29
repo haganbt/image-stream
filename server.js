@@ -20,21 +20,17 @@ app.get('/', function (req, res) {
 
 app.post('/data', function (req, res) {
 	
-	console.log('DEBUG: Processing POST request.')
+  console.log('DEBUG: Processing POST request.')
 
   try {
+    var body = req.body;
 
-  		//var body = req.body.toString().split("\n");
-  		var body = req.body;
-
-		// Each interaction
-  		for(i in body) {
-  				
-			for(var opengraphIndx in body[i].links.meta.opengraph){ 	
-	 			socket.emit('ping', { msg: '<p><img src="' + body[i].links.meta.opengraph[opengraphIndx].image + '" /><br /><br />' + body[i].interaction.content  + '</p><br /><br />' });
-			}
-	
-		}
+ 	// Each interaction
+  	for(i in body) {
+	  for(var opengraphIndx in body[i].links.meta.opengraph){ 	
+	    socket.emit('ping', { msg: '<p><img src="' + body[i].links.meta.opengraph[opengraphIndx].image + '" /><br /><br />' + body[i].interaction.content  + '</p><br /><br />' });
+	  }
+	}
 
 
   } catch (e){
@@ -48,7 +44,7 @@ app.post('/data', function (req, res) {
 //Socket.io emits this event when a connection is made.
 io.sockets.on('connection', function (s) {
 
-socket = s;
+  socket = s;
   // Emit a message to send it to the client.
   socket.emit('ping', { msg: 'Connected.' });
 
