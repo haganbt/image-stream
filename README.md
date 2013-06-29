@@ -1,7 +1,8 @@
 image-stream
 ============
 
-DataSifft HTTP POST rest endpoint - stream instagram photos from a DataSift push delivery to a browser via Socket.io.
+DataSifft HTTP POST REST endpoint - stream instagram photos from a DataSift push delivery to a browser via Socket.io.
+
 
 
 Sample CSDL:

@@ -10,16 +10,18 @@ var express = require("express"),
 server.listen(port);
 console.log("Express server listening on port " + port);
 console.log(url);
-
 app.use(express.bodyParser());
+
+
 
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
 
 
-app.post('/data', function (req, res) {
-	
+
+
+app.post('/data', function (req, res) {	
   console.log('DEBUG: Processing POST request.')
 
   try {
