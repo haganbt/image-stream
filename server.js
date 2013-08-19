@@ -35,8 +35,19 @@ app.post('/data', function (req, res) {
         continue;
        } 
 
-	  for(var opengraphIndx in body[i].links.meta.opengraph){ 	
-	    socket.emit('ping', { msg: '<p><img src="' + body[i].links.meta.opengraph[opengraphIndx].image + '" /><br /><br />' + body[i].interaction.content  + '</p><br /><br />' });
+
+	  // links.meta.opengraph.image
+	  for(var opengraphIndx in body[i].links.meta.opengraph){ 
+	  	
+	  	var html = '<p><img src="' + body[i].links.meta.opengraph[opengraphIndx].image + '" /><br /><br />' 
+	  	  if(body[i].interaction.content !== undefined){
+	  	    html += body[i].interaction.content;
+	  	  }	
+	  	  html += '</p><br /><br />';
+	  				
+	  				
+	  		
+	    socket.emit('ping', { msg: html });
 	  }
 	}
 
